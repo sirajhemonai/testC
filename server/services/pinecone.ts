@@ -85,7 +85,7 @@ export class PineconeService {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      const data = await response.json();
+      const data = await response.json() as any;
       return data.embedding?.values || [];
     } catch (error) {
       console.error("Error generating embedding:", error);

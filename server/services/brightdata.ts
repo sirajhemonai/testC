@@ -55,7 +55,7 @@ export class BrightDataService {
             scrapedPages.push(response);
             console.log(`[BrightData] Successfully scraped: ${url}`);
           }
-        } catch (error) {
+        } catch (error: any) {
           console.log(`[BrightData] Failed to scrape ${page}: ${error.message}`);
           // Continue with other pages
         }
@@ -72,7 +72,7 @@ export class BrightDataService {
 
       console.log(`[BrightData] Total pages scraped: ${scrapedPages.length}`);
       return scrapedPages;
-    } catch (error) {
+    } catch (error: any) {
       console.error('[BrightData] Scraping error:', error);
       throw new Error(`Failed to scrape website: ${error.message}`);
     }
@@ -205,11 +205,6 @@ export class BrightDataService {
     
     // Limit length to avoid token limits
     return combinedContent.substring(0, 8000);
-  }
-
-  private extractTitle(html: string): string {
-    const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
-    return titleMatch ? titleMatch[1].trim() : '';
   }
 
   private extractTitle(html: string): string {

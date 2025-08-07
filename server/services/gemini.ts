@@ -238,7 +238,7 @@ Include recent innovations and what leading ${businessType} companies are using.
       return getDefaultIndustryResearch(businessType);
     }
 
-    const data = await response.json();
+    const data = await response.json() as any;
     return data.choices[0].message.content;
   } catch (error) {
     console.error("Perplexity research error:", error);

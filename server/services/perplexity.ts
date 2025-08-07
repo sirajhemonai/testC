@@ -58,7 +58,7 @@ export class PerplexityService {
       throw new Error(`Perplexity API error: ${response.status} ${response.statusText}`);
     }
 
-    return response.json();
+    return response.json() as Promise<PerplexityResponse>;
   }
 
   async analyzeWebsite(websiteUrl: string): Promise<{

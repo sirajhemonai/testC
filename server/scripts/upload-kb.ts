@@ -110,8 +110,7 @@ function extractKeywords(content: string): string[] {
 export { uploadKnowledgeBase };
 
 // Run if called directly
-const isMainModule = import.meta.url === `file://${process.argv[1]}`;
-if (isMainModule) {
+if (require.main === module) {
   uploadKnowledgeBase()
     .then(() => {
       console.log('Upload completed successfully');
