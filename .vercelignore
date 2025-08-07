@@ -73,7 +73,6 @@ FINAL_DEPLOYMENT_STATUS.md
 test-*.txt
 *.md
 !README.md
-attached_assets/
 uploads/
 examples/
 kb.md
