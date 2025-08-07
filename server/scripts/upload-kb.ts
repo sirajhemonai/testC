@@ -109,15 +109,4 @@ function extractKeywords(content: string): string[] {
 // Export for use in routes
 export { uploadKnowledgeBase };
 
-// Run if called directly
-if (require.main === module) {
-  uploadKnowledgeBase()
-    .then(() => {
-      console.log('Upload completed successfully');
-      process.exit(0);
-    })
-    .catch((error) => {
-      console.error('Upload failed:', error);
-      process.exit(1);
-    });
-}
+// Run if called directly (disabled for ES modules)
