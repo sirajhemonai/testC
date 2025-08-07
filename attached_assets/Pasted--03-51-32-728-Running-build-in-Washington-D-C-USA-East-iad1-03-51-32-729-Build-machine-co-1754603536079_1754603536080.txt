@@ -1,0 +1,49 @@
+[03:51:32.728] Running build in Washington, D.C., USA (East) – iad1
+[03:51:32.729] Build machine configuration: 2 cores, 8 GB
+[03:51:32.766] Cloning github.com/sirajhemonai/testC (Branch: main, Commit: cf0073b)
+[03:51:32.882] Previous build caches not available
+[03:51:33.225] Cloning completed: 458.000ms
+[03:51:33.271] Found .vercelignore
+[03:51:33.296] Removed 94 ignored files defined in .vercelignore
+[03:51:33.296]   /.env.example
+[03:51:33.296]   /.git/config
+[03:51:33.297]   /.git/description
+[03:51:33.297]   /.git/FETCH_HEAD
+[03:51:33.297]   /.git/HEAD
+[03:51:33.297]   /.git/hooks/applypatch-msg.sample
+[03:51:33.297]   /.git/hooks/commit-msg.sample
+[03:51:33.297]   /.git/hooks/fsmonitor-watchman.sample
+[03:51:33.297]   /.git/hooks/post-update.sample
+[03:51:33.297]   /.git/hooks/pre-applypatch.sample
+[03:51:36.007] Running "vercel build"
+[03:51:36.453] Vercel CLI 44.7.3
+[03:51:37.674] Installing dependencies...
+[03:51:42.488] npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+[03:51:43.660] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[03:51:43.726] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[03:51:53.068] 
+[03:51:53.069] added 663 packages in 15s
+[03:51:53.069] 
+[03:51:53.070] 81 packages are looking for funding
+[03:51:53.070]   run `npm fund` for details
+[03:51:53.261] 
+[03:51:53.263] > rest-express@1.0.0 build
+[03:51:53.264] > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+[03:51:53.264] 
+[03:51:53.562] [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+[03:51:53.615] transforming...
+[03:51:53.910] Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+[03:51:53.911]   npx update-browserslist-db@latest
+[03:51:53.912]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[03:51:56.027] [32m✓[39m 90 modules transformed.
+[03:51:56.034] [31mx[39m Build failed in 2.45s
+[03:51:56.035] [31merror during build:
+[03:51:56.035] [31m[vite:asset] Could not load /vercel/path0/attached_assets/67fab5bb-319b-48de-a7a4-eedeb4d4e9a3_1754256540780.png (imported by client/src/pages/homepage.tsx): ENOENT: no such file or directory, open '/vercel/path0/attached_assets/67fab5bb-319b-48de-a7a4-eedeb4d4e9a3_1754256540780.png'[31m
+[03:51:56.036]     at async open (node:internal/fs/promises:639:25)
+[03:51:56.036]     at async Object.readFile (node:internal/fs/promises:1243:14)
+[03:51:56.036]     at async fileToBuiltUrl (file:///vercel/path0/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:20428:19)
+[03:51:56.036]     at async Object.load (file:///vercel/path0/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:20328:17)
+[03:51:56.036]     at async PluginDriver.hookFirstAndGetPlugin (file:///vercel/path0/node_modules/rollup/dist/es/shared/node-entry.js:20689:28)
+[03:51:56.037]     at async file:///vercel/path0/node_modules/rollup/dist/es/shared/node-entry.js:19809:33
+[03:51:56.037]     at async Queue.work (file:///vercel/path0/node_modules/rollup/dist/es/shared/node-entry.js:20899:32)[39m
+[03:51:56.065] Error: Command "npm run build" exited with 1
