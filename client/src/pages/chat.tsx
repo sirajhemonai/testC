@@ -180,17 +180,36 @@ export default function Chat() {
 
   const handleContinueFromSummary = async () => {
     try {
+      // Get sessionId from current session or create a new one
+      const sessionId = (currentSession as any)?.session?.id || Date.now();
+      
       // Call the start-chat endpoint to begin the conversational AI
       const response = await fetch('/api/consultation/start-chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId })
       });
       
       if (response.ok) {
+        const data = await response.json();
+        
         setShowSummary(false);
         setConsultationStarted(true);
         
-        // Refresh messages to show the greeting question
+        // Add the first AI message directly if provided
+        if (data.firstQuestion) {
+          const firstMessage: Message = {
+            id: Date.now(),
+            content: data.firstQuestion.text,
+            isUser: false,
+            timestamp: formatTimestamp(new Date()),
+            quickReplies: data.firstQuestion.suggestions || [],
+            messageType: 'question'
+          };
+          setMessages([firstMessage]);
+        }
+        
+        // Refresh messages to sync with server
         setTimeout(() => {
           refetch();
           refetchSession();

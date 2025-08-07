@@ -1,5 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
+// Declare global messages store
+declare global {
+  var messages: any[] | undefined;
+}
+
 // Simple handler without Express to avoid runtime issues
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Enable CORS
@@ -110,22 +115,38 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (path === '/api/consultation/start-chat' && method === 'POST') {
       const { sessionId } = req.body || {};
       
-      if (!sessionId) {
-        return res.status(400).json({ error: "Session ID is required" });
+      // Create sessionId if not provided
+      const id = sessionId || Date.now();
+
+      // Create the first AI message with a personalized greeting
+      const firstQuestion = {
+        text: "Great! Let me understand your coaching business better. What's the main challenge you're facing with lead generation and client management?",
+        suggestions: [
+          "Too many manual tasks",
+          "Missing follow-ups",
+          "No time for marketing",
+          "Need better systems"
+        ]
+      };
+
+      // Store the message in a simple in-memory store for this session
+      if (!global.messages) {
+        global.messages = [];
       }
+      
+      global.messages.push({
+        id: Date.now(),
+        content: firstQuestion.text,
+        isUser: false,
+        timestamp: new Date().toISOString(),
+        quickReplies: firstQuestion.suggestions,
+        messageType: 'question'
+      });
 
       return res.status(200).json({
         success: true,
-        session: { id: sessionId },
-        firstQuestion: {
-          text: "Great! Let me understand your coaching business better. What's the main challenge you're facing with lead generation and client management?",
-          suggestions: [
-            "Too many manual tasks",
-            "Missing follow-ups",
-            "No time for marketing",
-            "Need better systems"
-          ]
-        }
+        session: { id },
+        firstQuestion
       });
     }
 
@@ -150,6 +171,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Reset consultation
     if (path === '/api/consultation/reset' && method === 'POST') {
+      // Clear messages when resetting
+      global.messages = [];
       return res.status(200).json({ success: true });
     }
 
@@ -166,16 +189,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Get messages
     if (path === '/api/messages' && method === 'GET') {
-      return res.status(200).json([]);
+      // Return messages from global store if available
+      return res.status(200).json(global.messages || []);
     }
 
     // Create message
     if (path === '/api/messages' && method === 'POST') {
       const messageData = req.body || {};
-      return res.status(201).json({
+      
+      // Initialize global messages if not exists
+      if (!global.messages) {
+        global.messages = [];
+      }
+      
+      const newMessage = {
         id: Date.now(),
         ...messageData
-      });
+      };
+      
+      global.messages.push(newMessage);
+      
+      return res.status(201).json(newMessage);
     }
 
     // Get current consultation session
