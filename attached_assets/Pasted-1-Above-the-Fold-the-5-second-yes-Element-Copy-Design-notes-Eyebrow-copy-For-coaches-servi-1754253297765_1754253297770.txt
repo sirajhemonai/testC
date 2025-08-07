@@ -1,0 +1,105 @@
+1 ▸ Above‑the‑Fold (the 5‑second “yes”)
+Element	Copy / Design notes
+Eyebrow copy	For coaches & service founders ready to unlock AI — instant relevance
+Headline (H1)	“Real AI experts map your first revenue‑saving automations in 24 hrs.” (benefit + time shrink + human emphasis)
+Sub‑headline	Paste your site, share a goal, and within a day our specialists hand you a step‑by‑step AI‑agent action plan—no generic bots, 100 % done‑with‑you.
+Primary CTA button	Get My Expert Plan →
+CTA micro‑copy	Human insight • 24‑hr turnaround • $0 to start
+Hero visual	Split screen GIF: left shows your scraper scanning a sample site; right shows a human expert on Loom highlighting personalised automations (engaging hero shot + benefit overlay).
+Partner‑logo trust bar	Icons: ManyChat • Zapier • Make • Semrush • OpenAI • Google Cloud (real partnerships build credibility without false media claims).
+
+2 ▸ Real‑time Social Proof FOMO
+✅ Amelia (Fitness Coach) just received her AI Expert Plan
+
+Rotates names & niches every 12 s. Social‑proof notifications typically lift sign‑ups 10‑15 %.
+
+3 ▸ Fast‑Win Benefit Tiles (click‑to‑expand)
+rust
+Copy
+🕒 Save 10 hrs/week — experts pinpoint low‑hanging tasks
+📈 +30 % lead response speed — human‑designed DM bots
+💰 Payback in <30 days — ROI‑first roadmap
+🔌 Zero tech chaos — we match tools you already use
+Lead with benefits, not feature lists.
+
+4 ▸ How the Expert Flow Works (60‑second hook)
+Step 1 – Paste your site
+Step 2 – Answer 7 quick questions
+Step 3 – Get a Loom video + PDF plan in 24 hrs
+Step 4 – Optional hands‑on build (from $100)
+
+Copy uses the three‑step hook: context lean‑in → scroll‑stop “but” line (“no bots here…”) → contrarian snapback (“because a real human reviewed your business”).
+
+5 ▸ Comparison Table – “DIY vs Generic AI vs Human Experts”
+ 	Do‑It‑Yourself	Generic AI Tool	SellSpark AI Experts
+Time to insights	12‑30 hrs of research	5 min generic report	< 24 hrs tailored plan
+Relevance	Guesswork	Keyword‑based prompts	Manual deep‑dive by coach‑focused specialists
+Implementation help	None	Limited docs	Hands‑on build, iteration & QA
+Cost risk	Hidden & ongoing	Unknown upsells	Pay only if you love the plan
+Expected ROI	Uncertain	Unclear	Projected payback in < 30 days
+
+Balanced tone educates without hard bashing; highlights your unique wins.
+
+6 ▸ Intent‑Placed Testimonials (swap to real names as they arrive)
+“The expert video hit my inbox before breakfast—three days later we had a DM bot booking calls.”
+— Samira, Business Coach
+
+“Our onboarding emails now send on autopilot; 20 mins saved per client.”
+— Marcus, Online Fitness Coach
+
+Place each testimonial right after the benefit it proves.
+
+7 ▸ Risk‑Reducer Badge Strip
+Badge	Why it matters
+24‑hr turnaround guarantee	Time shrink (Value Equation)
+Love‑it‑or‑pay‑nothing	De‑risks purchase
+Unlimited tweaks (first 30 days)	Boosts perceived success likelihood
+Cancel anytime	Lowers effort & sacrifice
+
+8 ▸ Smart Lead‑Capture Form
+Get My Expert AI Plan (subtitle: “takes < 2 min”)
+
+Business Name (text)
+
+Website URL (text)
+
+Email (email)
+
+Business Type (dropdown)
+
+Automation Goal (short text, prompt example)
+
+Current Process (textarea)
+
+Time Spent Daily (dropdown)
+
+Team Size (dropdown)
+
+Main Challenge (textarea)
+
+Budget Range (dropdown)
+
+CTA button copy: Send to My Expert →
+Micro‑copy under button: Humans only • No credit card
+
+9 ▸ FAQ accordion (top 4 doubts)
+“Is this really handled by humans?”
+Absolutely—every plan is reviewed by a senior automation architect.
+
+“What happens after I get the plan?”
+You choose: DIY, hire us to implement from $100, or walk away free.
+
+“Do you need access to my tools?”
+No. We analyse only public info until you invite us.
+
+“How can you guarantee 24 hrs?”
+We reserve daily slots for the first 10 submissions.
+
+10 ▸ TL;DR CTA Panel (for scroll skippers)
+Ready to trade busy‑work for better margins?
+Paste your site now—our experts send a personalised AI roadmap in 24 hrs. Pay nothing unless you love it.
+Get My Expert Plan → (micro‑copy: “Instant, human‑made insights”)
+
+11 ▸ Footer Trust Cues
+Icons: Stripe • PayPal • G‑Pay + “Powered by ManyChat • Zapier • Make • Semrush • OpenAI”.
+

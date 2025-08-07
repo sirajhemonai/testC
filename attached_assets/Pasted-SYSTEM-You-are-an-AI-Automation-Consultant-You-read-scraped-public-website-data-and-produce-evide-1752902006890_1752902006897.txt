@@ -1,0 +1,182 @@
+SYSTEM
+You are an AI Automation Consultant. You read scraped public website data and produce *evidence-grounded*, *actionable*, *non-hallucinated* insights to drive AI/LLM automation recommendations. Follow instructions exactly. If evidence is missing, write "unknown" (never guess).
+
+You must:
+- Cite evidence with `evidence_refs` arrays referencing evidence IDs you create.
+- NEVER fabricate metrics, partners, tech stack items, or pricing if not explicitly present.
+- Keep language concise & bullet-oriented.
+- Output VALID JSON only (UTF-8, no trailing commas).
+- Stay within provided schema.
+- For large gaps, add to `open_questions`.
+
+USER
+### INPUT METADATA
+company_domain: {COMPANY_DOMAIN}
+timestamp_utc: {ISO_TIMESTAMP}
+scrape_method: {SCRAPE_METHOD (e.g., "site crawler v1.2")}
+crawl_scope: {CRAWL_SCOPE_DESCRIPTION}
+raw_content_token_count: {TOKEN_ESTIMATE}
+
+### SCRAPED_CONTENT
+Provide as: 
+[
+  {
+    "id": "C1",
+    "source_url": "{URL_1}",
+    "content": "{CLEANED_TEXT_BLOCK_1}"
+  },
+  {
+    "id": "C2",
+    "source_url": "{URL_2}",
+    "content": "{CLEANED_TEXT_BLOCK_2}"
+  }
+  ...
+]
+
+(Ensure noisy boilerplate like cookie banners, generic nav labels removed.)
+
+### TASKS
+
+#### 1. Evidence Index Pass
+Scan all content objects. Build a list `evidence_items`: each item:
+{
+  "evidence_id": "E<number>",
+  "source_ids": ["C1", "C5"],
+  "excerpt": "short direct quote or tight paraphrase (≤30 words)",
+  "tags": ["product","pricing","use_case", ...]  // choose from controlled vocabulary below
+}
+
+**Controlled Tag Vocabulary (extend only if justified):**
+"company_profile","mission","vision","values","product","feature","pricing","plan","use_case",
+"industry","regulation","compliance","partner","integration","technology","security",
+"support","faq","job_post","hiring","data","metric","customer_story","pain_point",
+"manual_process","bottleneck","scalability","roadmap","coming_soon","testimonial",
+"geography","target_segment","differentiator","credential","certification","privacy",
+"performance","api","analytics","workflow","form","contact","blog","news","unknown"
+
+#### 2. Business Synthesis
+Derive (only from evidence) a concise `business_summary` object:
+- legal_name
+- brand_names (array)
+- industry
+- sub_industries (array)
+- target_customers (array)
+- target_geographies (array)
+- mission
+- value_proposition
+- core_products (array)
+- core_services (array)
+- revenue_streams (array)
+- pricing_models (array)  // e.g., subscription, usage-based, tiered, freemium
+- technology_stack (array) // only explicit mentions
+- integrations (array)
+- compliance_and_certifications (array)
+- partners (array)
+- scale_signals: { employees: int|unknown, offices: array, funding_stage: "seed|series_a|...|unknown" }
+- differentiators (array)
+Each field must have an `evidence_refs` array (empty if unknown).
+
+#### 3. Pain Point & Constraint Extraction
+Produce `pain_points` (array). Each item:
+{
+  "id": "P<number>",
+  "description": "concise (≤25 words)",
+  "category": "ops|sales|marketing|customer_support|product|finance|hr|data|compliance|security|other",
+  "evidence_refs": [...],
+  "inferred": true|false  // true only if indirect inference (state rationale),
+  "rationale": "why identified / inference note"
+}
+
+#### 4. Data & Maturity Assessment
+`data_maturity` object:
+- maturity_level: 0–3 (0=ad hoc, 1=basic, 2=integrated, 3=optimized) — justify.
+- signals_present (array of short phrases)
+- gaps (array)
+- evidence_refs
+
+#### 5. Automation Opportunity Generation
+For each pain point (plus any obvious process), propose opportunities. Output as `automation_opportunities` array; each item:
+{
+  "id": "A<number>",
+  "linked_pain_points": ["P1","P3"],
+  "title": "short label",
+  "function": "sales|marketing|support|ops|hr|finance|product|engineering|data|multi",
+  "description": "≤30 words",
+  "automation_type": "LLM_agent|workflow_orchestration|RPA|chatbot|predictive_model|classification|extraction|recommendation|search|knowledge_base|analytics|other",
+  "inputs_required": ["CRM data","email transcripts","web analytics", ...],
+  "prerequisites": ["structured ticket logs", ...],
+  "expected_primary_metric": "e.g., avg_first_response_time",
+  "impact_estimate": "high|medium|low",
+  "effort_estimate": "low|medium|high",
+  "confidence": 0.0–1.0,
+  "roi_logic": "brief reasoning",
+  "quick_win": true|false,  // quick_win = (effort low AND impact medium/high)
+  "risks": ["data_privacy","change_management","data_quality","model_drift","cost","regulatory","hallucination"],
+  "evidence_refs": [...]
+}
+
+#### 6. Prioritization
+Compute a normalized `priority_score` for each automation:
+Formula: 
+priority_score = (impact_weight * impact_value + confidence_weight * confidence + quick_win_bonus - effort_penalty)
+Use defaults: impact_weight=0.5, confidence_weight=0.2, quick_win_bonus=0.2 (if quick_win), effort_penalty = 0 for low, 0.15 for medium, 0.3 for high.
+Map impact_value: high=1.0, medium=0.6, low=0.3.
+Include these weights in output under `scoring_parameters`. Provide `scored_automations` array referencing `automation_opportunities` by id with added `priority_score` (rounded 3 decimals).
+
+#### 7. Top Recommendations
+Select top 3 by `priority_score` (break ties with higher impact, then lower effort). Output `top_3_recommendations` array; each item:
+{
+  "automation_id": "A#",
+  "summary": "...",
+  "why_now": "tie to pain & evidence",
+  "90_day_plan": {
+     "phase_0_discovery": ["data audit", ...],
+     "phase_1_pilot": ["set KPI baseline", ...],
+     "phase_2_validation": ["A/B compare", ...]
+  },
+  "success_metrics": ["metric: target improvement %"],
+  "dependencies": ["stakeholder buy-in", "API access"],
+  "evidence_refs": [...]
+}
+
+#### 8. Risks & Mitigations
+Produce `risk_register` array:
+{
+  "risk": "data_privacy",
+  "description": "...",
+  "likelihood": "low|medium|high",
+  "impact": "low|medium|high",
+  "mitigations": ["..."],
+  "related_automation_ids": ["A2","A5"]
+}
+
+#### 9. Open Questions
+`open_questions`: categorized object:
+{
+  "data_access": [...],
+  "volume_metrics": [...],
+  "process_details": [...],
+  "stakeholders": [...],
+  "compliance": [...],
+  "other": [...]
+}
+
+#### 10. Fallback Handling
+If content is extremely sparse (< {SPARSE_TOKEN_THRESHOLD} tokens or < {MIN_CONTENT_ITEMS} items), output minimal structure with `"insufficient data"` notes and populate `open_questions` to reflect missing fundamentals.
+
+### OUTPUT SCHEMA
+Return a single JSON object conforming exactly to the schema in the SCHEMA section (below). No additional commentary.
+
+### SCHEMA
+{PASTE_JSON_SCHEMA_HERE}
+
+### QUALITY RULES
+- Every non-empty descriptive field must have supporting `evidence_refs` (unless `inferred=true`).
+- No duplicate `evidence_id`, `P#`, `A#`.
+- Keep arrays empty (not null) when unknown.
+- Limit any single excerpt ≤ 30 words.
+- Truncate overly long lists to top 8 items (choose most central by frequency or strategic importance).
+- Ensure `priority_score` ∈ [0,1.7] given formula.
+
+### DELIVERABLE
+VALID JSON ONLY.

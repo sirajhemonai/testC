@@ -1,0 +1,31 @@
+2 Adaptive Q&A Graph (“Discovery Loop 2.0”)
+Turns the existing six‑step chat into a data‑driven scoring engine that refines suggestions in‑session.
+
+Stage	Incremental Upgrade	Stack
+2.1 Pain taxonomy	Assign each question to one of eight core friction buckets (Lead Flow, Follow‑Up, Onboarding, Accountability, Content, Upsell, Retention, Admin).	YAML config
+2.2 Real‑time scoring	After every answer, Gemini 1.5 Flash calls updatePainMatrix()—a simple JSON object {bucket: cumulativeScore} (scale 0–10). The highest bucket at any moment determines the next question via Pinecone search for “greatest information gain”.	Gemini 1.5 Flash, Pinecone
+2.3 Micro‑persona fork	Once two buckets surpass a 7/10 score, the system assigns the user to one of five pre‑built coach personas (Solo Scaling Sally, Content‑Crushed Carl, etc.). This persona adds a weight to recipe ranking so suggestions feel even more bespoke.	Rules engine
+2.4 Confidence‑indexed output	Final analyzeBusinessForAutomation() (Gemini 2.5 Pro) receives both the PainMatrix and PersonaID. It returns:
+• A ranked list of automations (score, pain addressed, effort score)
+• “Why we chose this” sentences that quote the coach’s own words (boosts perceived relevance).	Gemini 2.5 Pro
+
+Why it wins: Interactive personalisation without asking more questions. The user sees the list evolve as they answer, making the AI feel consultative instead of prescriptive.
+
+.3 Explain‑like‑I’m‑5 translator	GPT‑4o (via function call) ingests the raw JSON and emits:
+• A one‑line headline (“Expected to save you ~14 hrs/mo and pay back in 11 days”).
+• A badge colour (green / orange / red) for risk.	OpenAI GPT‑4o
+
+Visual UX	In the results page, display a mini‑bar chart of payback days plus the badge—makes the decision obvious.
+
+using this startegy improve the recommendation system.
+
+
+2.1 Real‑time question service
+typescript
+Copy
+
+POST /api/consultation/respond
+body: { sessionID, lastAnswer }
+
+→ updatePainMatrix(lastAnswer)        // simple weight add
+→ generateNextQuestion()

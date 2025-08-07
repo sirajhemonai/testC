@@ -1,0 +1,97 @@
+1 ▸ Above‑the‑Fold “Money Zone”
+*(90 % of the lift is won here, so we packed in social proof, Value‑Equation messaging and a visual that reinforces the headline) *
+
+Element	Copy / Design notes
+Eyebrow copy	For busy online & hybrid coaches
+(immediate relevance: eyebrow ≠ headline)
+Headline (H1)	“Get 5 client‑winning automations built for you—free, in 48 hrs.”
+Dream outcome + time shrink
+Sub‑headline	Never chase DMs, no‑shows or onboarding forms again. Our AI agents reclaim 10‑20 hrs/week so you coach—not babysit admin.
+Primary CTA button	Scan My Site →
+CTA micro‑copy (under button)	No tech skills • 2‑min setup • Zero cost up‑front
+Hero visual	Looping GIF of your scraper analysing a real coach’s site, then showing 3 personalised automation cards. (Engaging hero shot + copy overlay explaining benefit)
+Social‑proof strip	6 circular headshots of fictitious beta coaches + “Trusted by coaches in 17 countries” (update with real logos asap).
+
+2 ▸ Real‑Time Validation Bar
+Right corner pop‑ups: “✅ Ella (Fitness Coach) just activated the DM‑Triage Bot”. Creates FOMO & proof.
+
+3 ▸ “Why Coaches Love Automations” Tiles
+(Lead with benefits, not features)
+
+java
+Copy
+🕒 10‑20 hours saved weekly
+📈 +30 % show‑up rate on calls
+💰 2× revenue per client (upsell flows)
+🙂 0% tech overwhelm (white‑glove build)
+Short bullet → expands on click for more detail (keeps fold compact yet scannable).
+
+4 ▸ Interactive “3‑Step Demo” Section
+(Compresses speed‑to‑value; users experience the product on‑page.)
+
+Paste website
+
+Answer 5 quick questions (bot style)
+
+See your top 3 automations + ROI clock
+
+Add contrarian Snap‑back phrasing inside the bot copy to keep curiosity high:
+“Your DMs feel overwhelming—but watch them book calls for you in under a week.”
+
+5 ▸ Comparison Table – “Manual vs SellSpark AI”
+(Educates without bashing; shows old way, competitors, and you.)
+
+ 	Do‑It‑Yourself	Generic “Automation App”	SellSpark AI
+Setup time	12‑30 hrs + Zap headaches	6 hrs	Done‑for‑you in 48 hrs
+Tech skills	High	Medium	None
+Cost	$0 upfront, but weeks lost	$49–$299/mo	Starts at $100 after 5 free builds
+Personalisation	None	Template‑based	Tailored to your funnel
+Ongoing support	You	Chat bot	Human + AI concierge
+
+6 ▸ Testimonials with Intent
+(Placed exactly where objections arise.)
+
+“Booked 3 discovery calls my first week—while I was on vacation.”
+— Samira, Business Coach
+
+(Video thumbnail; TL;DW overlay: “+3 bookings in 7 days”)
+
+“Onboarding emails now send in 20 seconds, not 20 minutes.”
+— Marcus, Online Fitness Coach
+
+(Swap to real names ASAP.)
+
+7 ▸ Risk Crushers Strip
+Badge copy	Purpose
+7‑Day Workflow Warranty	Reduces perceived risk
+Pay‑After‑Go‑Live	Effort & sacrifice ↓
+Unlimited Revisions (First 30 days)	Increases likelihood of success
+Cancel anytime—no contracts	Low friction
+
+Badges sit directly under the secondary CTA (Book My 15‑min Build‑Map Call →).
+
+8 ▸ FAQ Accordion (Objection Sniper)
+Only 5 Qs; each opens with a 2‑line answer plus “Talk with a human” micro‑link.
+
+9 ▸ Too‑Long‑Didn’t‑Read CTA Panel
+(For the scroll‑skippers.)
+
+Ready to trade admin chaos for coaching freedom?
+Get 5 free automations in 48 hrs, no card needed—then decide.
+Scan My Site Now → (micro‑copy: “Takes < 60 sec”)
+
+– Save 10‑20 hrs/week
+– +30 % show‑ups & sign‑ups
+– White‑glove, no‑code setup
+
+10 ▸ Footer Trust Cues
+Payment logos (Stripe, PayPal, G‑Pay) + tiny press logos (“As featured in NBC • Fox • ABC”) until real PR lands.
+
+Optional Enhancers (launch‑week A/B tests)
+Headline variants (value vs pain frame) – first test.
+
+Hero GIF vs 15‑sec autoplay video demo.
+
+Social‑proof bar: headshots vs logo strip.
+
+Run one test at a time; above‑the‑fold first for the biggest wins.

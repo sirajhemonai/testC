@@ -1,0 +1,49 @@
+# Windows PowerShell Commands to Push to New Repository
+# ======================================================
+
+# STEP 1: Remove old remote
+git remote remove origin
+
+# STEP 2: Add your new repository (replace YOUR_NEW_REPO_NAME)
+git remote add origin https://github.com/sirajhemonai/YOUR_NEW_REPO_NAME.git
+
+# STEP 3: Verify remote is set correctly
+git remote -v
+
+# STEP 4: Stage all files
+git add -A
+
+# STEP 5: Create a fresh commit
+git commit -m "Initial commit - SellSpark Platform" --allow-empty
+
+# STEP 6: Try pushing to main branch
+git push -u origin main
+
+# IF STEP 6 FAILS, try this:
+git branch -M main
+git push -u origin main --force
+
+# IF STILL FAILING, try master branch:
+git branch -M master
+git push -u origin master --force
+
+# ALTERNATIVE: Complete fresh start
+# ---------------------------------
+# If nothing works, try this nuclear option:
+
+# 1. Initialize fresh git
+Remove-Item .git -Recurse -Force
+git init
+
+# 2. Add your new repository
+git remote add origin https://github.com/sirajhemonai/YOUR_NEW_REPO_NAME.git
+
+# 3. Add all files
+git add .
+
+# 4. Commit
+git commit -m "Fresh start - SellSpark Platform"
+
+# 5. Push
+git branch -M main
+git push -u origin main --force

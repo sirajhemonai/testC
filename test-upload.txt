@@ -1,0 +1,31 @@
+SellSpark Training Document
+
+This is a test training document for the SellSpark automation consultation tool.
+
+Key Automation Concepts:
+1. Lead Generation Automation
+   - Automated lead capture forms
+   - CRM integration
+   - Lead scoring systems
+   
+2. Customer Support Automation
+   - AI chatbots
+   - Ticket routing
+   - FAQ automation
+   
+3. Marketing Automation
+   - Email campaigns
+   - Social media scheduling
+   - Content personalization
+
+Common Tools:
+- Make.com (formerly Integromat)
+- Zapier
+- n8n
+- Pipedream
+
+Best Practices:
+- Start with simple automations
+- Test thoroughly before deployment
+- Monitor performance metrics
+- Iterate based on results

@@ -1,0 +1,21 @@
+Running build in Washington, D.C., USA (East) – iad1
+Build machine configuration: 2 cores, 8 GB
+Cloning github.com/sirajhemonai/CoachLeadApp (Branch: main, Commit: 8f8d1f6)
+Cloning completed: 2.413s
+Restored build cache from previous deployment (9XK1Y7aQ6JWMf3RmBGLyQxisbYPG)
+Running "vercel build"
+Vercel CLI 44.6.4
+WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+Installing dependencies...
+up to date in 1s
+75 packages are looking for funding
+  run `npm fund` for details
+Using TypeScript 5.6.3 (local user-provided)
+api/index.ts(1,52): error TS2307: Cannot find module '@vercel/node' or its corresponding type declarations.
+server/storage.ts(114,14): error TS2420: Class 'MemStorage' incorrectly implements interface 'IStorage'.
+  Type 'MemStorage' is missing the following properties from type 'IStorage': getProjects, getProject, createProject, updateProject, deleteProject
+server/routes/training.ts(256,40): error TS7016: Could not find a declaration file for module 'pdf-parse'. '/vercel/path0/node_modules/pdf-parse/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/pdf-parse` if it exists or add a new declaration (.d.ts) file containing `declare module 'pdf-parse';`
+server/routes/training.ts(276,7): error TS2353: Object literal may only specify known properties, and 'processedAt' does not exist in type 'Partial<{ size: number; path: string; filename: string; originalName: string; mimeType: string; error?: string | null | undefined; content?: string | null | undefined; status?: string | undefined; metadata?: string | ... 1 more ... | undefined; uploadedBy?: number | ... 1 more ... | undefined; }>'.
+server/routes/training.ts(287,14): error TS18046: 'error' is of type 'unknown'.
+server/services/chatbot-mode.ts(24,22): error TS2339: Property 'getGenerativeModel' does not exist on type 'GoogleGenAI'.
