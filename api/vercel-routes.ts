@@ -1,6 +1,5 @@
 import type { Express } from 'express';
 import { z } from 'zod';
-import { storage } from '../server/storage';
 import { insertMessageSchema, insertConsultationSessionSchema } from '@shared/schema';
 
 // Load AI services conditionally
@@ -29,11 +28,27 @@ async function loadAIServices() {
   return services;
 }
 
+// Get storage instance lazily to avoid initialization issues
+async function getStorage() {
+  try {
+    const { storage } = await import('../server/storage');
+    return storage;
+  } catch (error) {
+    console.error('Storage initialization error:', error);
+    // Return a mock storage for Vercel if database fails
+    return {
+      clearMessages: async () => {},
+      createConsultationSession: async (data: any) => ({ id: 1, ...data }),
+      updateConsultationSession: async () => {},
+      getCurrentConsultationSession: async () => null,
+      createMessage: async (data: any) => ({ id: 1, ...data }),
+      getAllMessages: async () => [],
+    };
+  }
+}
+
 export async function registerRoutes(app: Express) {
   const aiServices = await loadAIServices();
-  
-  // Initialize storage
-  await storage.clearMessages().catch(() => {});
   
   // Health check endpoint
   app.get("/api/health", async (req, res) => {
@@ -110,6 +125,9 @@ export async function registerRoutes(app: Express) {
         implementations: ["Automate lead capture", "Streamline onboarding", "Improve follow-up"]
       };
 
+      // Get storage instance
+      const storage = await getStorage();
+      
       // Create session
       const session = await storage.createConsultationSession({
         websiteUrl,
@@ -176,6 +194,7 @@ export async function registerRoutes(app: Express) {
   // Get messages endpoint
   app.get("/api/messages", async (req, res) => {
     try {
+      const storage = await getStorage();
       const messages = await storage.getAllMessages();
       res.json(messages);
     } catch (error) {
@@ -186,6 +205,7 @@ export async function registerRoutes(app: Express) {
   // Create message endpoint
   app.post("/api/messages", async (req, res) => {
     try {
+      const storage = await getStorage();
       const messageData = insertMessageSchema.parse(req.body);
       const message = await storage.createMessage(messageData);
       res.status(201).json(message);
@@ -201,6 +221,7 @@ export async function registerRoutes(app: Express) {
   // Get current consultation session
   app.get("/api/consultation/current", async (req, res) => {
     try {
+      const storage = await getStorage();
       const session = await storage.getCurrentConsultationSession();
       if (!session) {
         return res.status(404).json({ error: "No active consultation session" });
@@ -220,6 +241,9 @@ export async function registerRoutes(app: Express) {
         return res.status(400).json({ error: "Message is required" });
       }
 
+      // Get storage
+      const storage = await getStorage();
+      
       // Save user message
       await storage.createMessage({
         content: message,
