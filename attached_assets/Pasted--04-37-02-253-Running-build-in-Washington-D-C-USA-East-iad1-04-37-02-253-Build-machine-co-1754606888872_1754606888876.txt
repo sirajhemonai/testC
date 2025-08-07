@@ -1,0 +1,79 @@
+[04:37:02.253] Running build in Washington, D.C., USA (East) – iad1
+[04:37:02.253] Build machine configuration: 2 cores, 8 GB
+[04:37:02.268] Cloning github.com/sirajhemonai/testC (Branch: main, Commit: 87dea3c)
+[04:37:02.833] Cloning completed: 564.000ms
+[04:37:02.916] Found .vercelignore
+[04:37:02.942] Removed 45 ignored files defined in .vercelignore
+[04:37:02.942]   /.env.example
+[04:37:02.942]   /.git/config
+[04:37:02.942]   /.git/description
+[04:37:02.942]   /.git/FETCH_HEAD
+[04:37:02.942]   /.git/HEAD
+[04:37:02.942]   /.git/hooks/applypatch-msg.sample
+[04:37:02.943]   /.git/hooks/commit-msg.sample
+[04:37:02.943]   /.git/hooks/fsmonitor-watchman.sample
+[04:37:02.943]   /.git/hooks/post-update.sample
+[04:37:02.943]   /.git/hooks/pre-applypatch.sample
+[04:37:04.064] Restored build cache from previous deployment (5PHxSTYoy3b5FxY7hSyx7W6pds9z)
+[04:37:08.595] Running "vercel build"
+[04:37:09.881] Vercel CLI 44.7.3
+[04:37:10.612] Installing dependencies...
+[04:37:12.086] 
+[04:37:12.087] up to date in 1s
+[04:37:12.088] 
+[04:37:12.088] 81 packages are looking for funding
+[04:37:12.088]   run `npm fund` for details
+[04:37:12.226] 
+[04:37:12.227] > rest-express@1.0.0 build
+[04:37:12.227] > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+[04:37:12.227] 
+[04:37:12.519] [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+[04:37:12.576] transforming...
+[04:37:12.913] Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+[04:37:12.913]   npx update-browserslist-db@latest
+[04:37:12.914]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[04:37:17.794] [32m✓[39m 1776 modules transformed.
+[04:37:18.220] rendering chunks...
+[04:37:18.231] computing gzip size...
+[04:37:18.251] [2m../dist/public/[22m[32mindex.html                                                              [39m[1m[2m  1.15 kB[22m[1m[22m[2m │ gzip:   0.59 kB[22m
+[04:37:18.252] [2m../dist/public/[22m[2massets/[22m[32m78c46763-06bc-428e-82e4-fe357adb66df_1754256540784-C2z416VU.png  [39m[1m[2m  7.27 kB[22m[1m[22m
+[04:37:18.252] [2m../dist/public/[22m[2massets/[22m[32m63a04fa1-a002-410b-a100-1606aabc9e1d_1754256540790-DHwkNZvi.png  [39m[1m[2m  9.90 kB[22m[1m[22m
+[04:37:18.252] [2m../dist/public/[22m[2massets/[22m[32me3e8379c-5dbf-4fab-b6bd-1aa94de1d8db_1754256540788-C6Y6Au4_.png  [39m[1m[2m 11.65 kB[22m[1m[22m
+[04:37:18.252] [2m../dist/public/[22m[2massets/[22m[32m67fab5bb-319b-48de-a7a4-eedeb4d4e9a3_1754256540780-BD2e6OfW.png  [39m[1m[2m 11.73 kB[22m[1m[22m
+[04:37:18.252] [2m../dist/public/[22m[2massets/[22m[32msellspark-logo-D1TXSoGo.jpg                                      [39m[1m[2m 24.83 kB[22m[1m[22m
+[04:37:18.252] [2m../dist/public/[22m[2massets/[22m[32mdce02e43-7261-417c-be6c-8fa96a3f70db_1754256540787-D8BbcWGF.png  [39m[1m[2m 26.78 kB[22m[1m[22m
+[04:37:18.253] [2m../dist/public/[22m[2massets/[22m[32mdarkmode_1754329222920-De0693Wk.png                              [39m[1m[2m102.61 kB[22m[1m[22m
+[04:37:18.253] [2m../dist/public/[22m[2massets/[22m[32mDayMode_1754329222925-58j25mwk.png                               [39m[1m[2m115.80 kB[22m[1m[22m
+[04:37:18.253] [2m../dist/public/[22m[2massets/[22m[35mindex-DofrzECU.css                                               [39m[1m[2m135.29 kB[22m[1m[22m[2m │ gzip:  21.34 kB[22m
+[04:37:18.253] [2m../dist/public/[22m[2massets/[22m[36mindex-BuTo-9vq.js                                                [39m[1m[33m656.09 kB[39m[22m[2m │ gzip: 184.85 kB[22m
+[04:37:18.253] [33m
+[04:37:18.254] (!) Some chunks are larger than 500 kB after minification. Consider:
+[04:37:18.254] - Using dynamic import() to code-split the application
+[04:37:18.254] - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+[04:37:18.254] - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[04:37:18.254] [32m✓ built in 5.71s[39m
+[04:37:18.328] 
+[04:37:18.329]   dist/index.js  208.8kb
+[04:37:18.329] 
+[04:37:18.329] ⚡ Done in 23ms
+[04:37:18.636] Using TypeScript 5.6.3 (local user-provided)
+[04:37:35.795] api/index.ts(371,37): error TS2551: Property 'getConsultationSession' does not exist on type 'DatabaseStorage | { clearMessages: () => Promise<void>; createConsultationSession: (data: any) => Promise<any>; updateConsultationSession: () => Promise<...>; getCurrentConsultationSession: () => Promise<...>; createMessage: (data: any) => Promise<...>; getAllMessages: () => Promise<...>; }'. Did you mean 'createConsultationSession'?
+[04:37:35.796]   Property 'getConsultationSession' does not exist on type '{ clearMessages: () => Promise<void>; createConsultationSession: (data: any) => Promise<any>; updateConsultationSession: () => Promise<void>; getCurrentConsultationSession: () => Promise<...>; createMessage: (data: any) => Promise<...>; getAllMessages: () => Promise<...>; }'.
+[04:37:35.797] api/index.ts(407,23): error TS2551: Property 'completeConsultationSession' does not exist on type 'DatabaseStorage | { clearMessages: () => Promise<void>; createConsultationSession: (data: any) => Promise<any>; updateConsultationSession: () => Promise<...>; getCurrentConsultationSession: () => Promise<...>; createMessage: (data: any) => Promise<...>; getAllMessages: () => Promise<...>; }'. Did you mean 'createConsultationSession'?
+[04:37:35.797]   Property 'completeConsultationSession' does not exist on type '{ clearMessages: () => Promise<void>; createConsultationSession: (data: any) => Promise<any>; updateConsultationSession: () => Promise<void>; getCurrentConsultationSession: () => Promise<...>; createMessage: (data: any) => Promise<...>; getAllMessages: () => Promise<...>; }'.
+[04:37:35.800] api/index.ts(444,33): error TS2551: Property 'getConsultationSession' does not exist on type 'DatabaseStorage | { clearMessages: () => Promise<void>; createConsultationSession: (data: any) => Promise<any>; updateConsultationSession: () => Promise<...>; getCurrentConsultationSession: () => Promise<...>; createMessage: (data: any) => Promise<...>; getAllMessages: () => Promise<...>; }'. Did you mean 'createConsultationSession'?
+[04:37:35.800]   Property 'getConsultationSession' does not exist on type '{ clearMessages: () => Promise<void>; createConsultationSession: (data: any) => Promise<any>; updateConsultationSession: () => Promise<void>; getCurrentConsultationSession: () => Promise<...>; createMessage: (data: any) => Promise<...>; getAllMessages: () => Promise<...>; }'.
+[04:37:35.800] api/index.ts(447,33): error TS2551: Property 'getLastCompletedConsultationSession' does not exist on type 'DatabaseStorage | { clearMessages: () => Promise<void>; createConsultationSession: (data: any) => Promise<any>; updateConsultationSession: () => Promise<...>; getCurrentConsultationSession: () => Promise<...>; createMessage: (data: any) => Promise<...>; getAllMessages: () => Promise<...>; }'. Did you mean 'createConsultationSession'?
+[04:37:35.802]   Property 'getLastCompletedConsultationSession' does not exist on type '{ clearMessages: () => Promise<void>; createConsultationSession: (data: any) => Promise<any>; updateConsultationSession: () => Promise<void>; getCurrentConsultationSession: () => Promise<...>; createMessage: (data: any) => Promise<...>; getAllMessages: () => Promise<...>; }'.
+[04:37:35.802] api/index.ts(477,38): error TS2339: Property 'getProjects' does not exist on type 'DatabaseStorage | { clearMessages: () => Promise<void>; createConsultationSession: (data: any) => Promise<any>; updateConsultationSession: () => Promise<...>; getCurrentConsultationSession: () => Promise<...>; createMessage: (data: any) => Promise<...>; getAllMessages: () => Promise<...>; }'.
+[04:37:35.803]   Property 'getProjects' does not exist on type '{ clearMessages: () => Promise<void>; createConsultationSession: (data: any) => Promise<any>; updateConsultationSession: () => Promise<void>; getCurrentConsultationSession: () => Promise<...>; createMessage: (data: any) => Promise<...>; getAllMessages: () => Promise<...>; }'.
+[04:37:35.803] api/index.ts(488,37): error TS2339: Property 'createProject' does not exist on type 'DatabaseStorage | { clearMessages: () => Promise<void>; createConsultationSession: (data: any) => Promise<any>; updateConsultationSession: () => Promise<...>; getCurrentConsultationSession: () => Promise<...>; createMessage: (data: any) => Promise<...>; getAllMessages: () => Promise<...>; }'.
+[04:37:35.803]   Property 'createProject' does not exist on type '{ clearMessages: () => Promise<void>; createConsultationSession: (data: any) => Promise<any>; updateConsultationSession: () => Promise<void>; getCurrentConsultationSession: () => Promise<...>; createMessage: (data: any) => Promise<...>; getAllMessages: () => Promise<...>; }'.
+[04:37:35.803] 
+[04:37:42.625] Build Completed in /vercel/output [32s]
+[04:37:42.965] Deploying outputs...
+[04:37:49.563] Deployment completed
+[04:37:50.408] Creating build cache...
+[04:38:17.553] Created build cache: 27.147s
+[04:38:17.554] Uploading build cache [139.36 MB]
+[04:38:20.355] Build cache uploaded: 2.801s

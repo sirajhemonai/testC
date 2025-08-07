@@ -62,11 +62,18 @@ async function getStorage() {
     // Return a mock storage for Vercel if database fails
     return {
       clearMessages: async () => {},
-      createConsultationSession: async (data: any) => ({ id: 1, ...data }),
+      createConsultationSession: async (data: any) => ({ id: 1, ...data, updatedAt: new Date() }),
       updateConsultationSession: async () => {},
       getCurrentConsultationSession: async () => null,
+      getConsultationSession: async (id: number) => ({ id, updatedAt: new Date() }),
+      completeConsultationSession: async (id: number) => {},
+      getLastCompletedConsultationSession: async () => null,
       createMessage: async (data: any) => ({ id: 1, ...data }),
       getAllMessages: async () => [],
+      getProjects: async () => [],
+      createProject: async (data: any) => ({ id: 1, ...data }),
+      updateProject: async (id: number, data: any) => ({ id, ...data }),
+      deleteProject: async (id: number) => {},
     };
   }
 }
@@ -368,7 +375,7 @@ async function registerRoutes() {
       }
 
       const storage = await getStorage();
-      const session = await storage.getConsultationSession?.(parseInt(sessionId));
+      const session = await storage.getConsultationSession(parseInt(sessionId));
       
       if (!session) {
         return res.status(404).json({ error: "Session not found" });
@@ -404,7 +411,7 @@ async function registerRoutes() {
       await storage.clearMessages();
       const session = await storage.getCurrentConsultationSession();
       if (session) {
-        await storage.completeConsultationSession?.(session.id);
+        await storage.completeConsultationSession(session.id);
       }
       res.json({ success: true });
     } catch (error) {
@@ -441,10 +448,10 @@ async function registerRoutes() {
       let session;
       
       if (sessionId) {
-        session = await storage.getConsultationSession?.(parseInt(sessionId));
+        session = await storage.getConsultationSession(parseInt(sessionId));
       } else {
         // Get the most recent completed session
-        session = await storage.getLastCompletedConsultationSession?.();
+        session = await storage.getLastCompletedConsultationSession();
       }
       
       if (!session) {
@@ -474,7 +481,7 @@ async function registerRoutes() {
   app.get("/api/projects", async (req: Request, res: Response) => {
     try {
       const storage = await getStorage();
-      const projects = await storage.getProjects?.() || [];
+      const projects = await storage.getProjects() || [];
       res.json(projects);
     } catch (error) {
       console.error("Error fetching projects:", error);
@@ -485,7 +492,7 @@ async function registerRoutes() {
   app.post("/api/projects", async (req: Request, res: Response) => {
     try {
       const storage = await getStorage();
-      const project = await storage.createProject?.(req.body) || { id: 1, ...req.body };
+      const project = await storage.createProject(req.body) || { id: 1, ...req.body };
       res.json(project);
     } catch (error) {
       console.error("Error creating project:", error);
