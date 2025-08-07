@@ -51,7 +51,14 @@ export async function respondToQuestion(response: string): Promise<{
     body: JSON.stringify({ response }),
   });
 
-  return apiResponse.json();
+  const data = await apiResponse.json();
+  
+  // Map the API response to the expected format
+  return {
+    isComplete: data.isComplete || false,
+    nextQuestion: data.nextQuestion,
+    finalAnalysis: data.finalAnalysis
+  };
 }
 
 export async function getCurrentSession(): Promise<ConsultationSession | null> {

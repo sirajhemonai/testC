@@ -237,6 +237,16 @@ export default function Chat() {
     
     setIsTyping(true);
 
+    // Add user message immediately
+    const userMessage: Message = {
+      id: Date.now(),
+      content: reply,
+      isUser: true,
+      timestamp: formatTimestamp(new Date()),
+      messageType: 'text'
+    };
+    setMessages(prev => [...prev, userMessage]);
+
     try {
       const result = await respondToQuestion(reply);
       
@@ -255,10 +265,21 @@ export default function Chat() {
         setTimeout(() => {
           window.location.href = "/results";
         }, 35000); // 35 seconds for progress animation
-      } else {
-        // Only refresh messages if not complete
-        refetch();
+      } else if (result.nextQuestion) {
+        // Add AI response message
+        const aiMessage: Message = {
+          id: Date.now() + 1,
+          content: result.nextQuestion.text,
+          isUser: false,
+          timestamp: formatTimestamp(new Date()),
+          quickReplies: result.nextQuestion.suggestions || [],
+          messageType: 'question'
+        };
+        setMessages(prev => [...prev, aiMessage]);
       }
+      
+      // Refresh messages from server to sync
+      setTimeout(() => refetch(), 500);
     } catch (error) {
       toast({
         title: "Error",
@@ -450,14 +471,7 @@ export default function Chat() {
             
             <div className="text-center">
               <button
-                onClick={() => {
-                  setShowSummary(false);
-                  setConsultationStarted(true);
-                  setTimeout(() => {
-                    refetch();
-                    refetchSession();
-                  }, 100);
-                }}
+                onClick={handleContinueFromSummary}
                 className="bg-[#FFD700] hover:bg-[#FFB700] text-black px-8 py-4 rounded-lg font-medium text-lg shadow-lg transform hover:scale-105 transition-all duration-200"
               >
                 Start Personalized Consultation →

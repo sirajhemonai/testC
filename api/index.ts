@@ -152,19 +152,47 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Consultation respond
     if (path === '/api/consultation/respond' && method === 'POST') {
-      const { message } = req.body || {};
+      const { response } = req.body || {};
       
-      if (!message) {
-        return res.status(400).json({ error: "Message is required" });
+      if (!response) {
+        return res.status(400).json({ error: "Response is required" });
       }
 
+      // Initialize global messages if not exists
+      if (!global.messages) {
+        global.messages = [];
+      }
+      
+      // Add user message
+      global.messages.push({
+        id: Date.now(),
+        content: response,
+        isUser: true,
+        timestamp: new Date().toISOString(),
+        messageType: 'text'
+      });
+
+      // Generate AI response
       const aiResponse = "Thank you for sharing that. Based on your coaching business, I recommend starting with automated lead capture and client onboarding systems. Would you like to explore specific automation tools?";
       const suggestions = ["Yes, show me the tools", "Tell me more about automation", "What's the ROI?", "I have questions"];
+
+      // Add AI message
+      global.messages.push({
+        id: Date.now() + 1,
+        content: aiResponse,
+        isUser: false,
+        timestamp: new Date().toISOString(),
+        quickReplies: suggestions,
+        messageType: 'question'
+      });
 
       return res.status(200).json({
         success: true,
         response: aiResponse,
-        suggestions,
+        nextQuestion: {
+          text: aiResponse,
+          suggestions: suggestions
+        },
         isComplete: false
       });
     }
