@@ -1,6 +1,6 @@
 import type { Express } from 'express';
 import { z } from 'zod';
-import { insertMessageSchema, insertConsultationSessionSchema } from '@shared/schema';
+import { insertMessageSchema, insertConsultationSessionSchema } from '../shared/schema';
 
 // Load AI services conditionally
 async function loadAIServices() {
@@ -8,8 +8,8 @@ async function loadAIServices() {
   
   try {
     if (process.env.GEMINI_API_KEY) {
-      const { GeminiService } = await import('../server/services/gemini');
-      services.gemini = new GeminiService();
+      const geminiModule = await import('../server/services/gemini');
+      services.gemini = geminiModule;
     }
     
     if (process.env.PERPLEXITY_API_KEY) {
@@ -149,7 +149,7 @@ export async function registerRoutes(app: Express) {
         content: greeting,
         isUser: false,
         messageType: "question",
-        quickReplies: null,
+        quickReplies: [],
       });
 
       // Start background analysis if services available
@@ -249,7 +249,7 @@ export async function registerRoutes(app: Express) {
         content: message,
         isUser: true,
         messageType: "text",
-        quickReplies: null,
+        quickReplies: [],
       });
 
       // Generate AI response if Gemini is available
@@ -265,7 +265,8 @@ export async function registerRoutes(app: Express) {
           Business context: ${JSON.stringify(context).slice(0, 500)}
           Provide a helpful, conversational response focused on automation opportunities. Keep it under 100 words.`;
           
-          aiResponse = await aiServices.gemini.generateText(prompt);
+          const { generateText } = aiServices.gemini;
+          aiResponse = await generateText(prompt);
         } catch (error) {
           console.error('Gemini generation error:', error);
         }
@@ -276,7 +277,7 @@ export async function registerRoutes(app: Express) {
         content: aiResponse,
         isUser: false,
         messageType: "text",
-        quickReplies: JSON.stringify(suggestions),
+        quickReplies: suggestions,
       });
 
       res.json({
