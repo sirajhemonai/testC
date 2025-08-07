@@ -330,6 +330,169 @@ async function registerRoutes() {
     }
   });
 
+  // Free Build Submission endpoint
+  app.post("/api/free-build-submission", async (req: Request, res: Response) => {
+    try {
+      const { name, email, website, biggestTimeSuck, automationDetails, shareResults } = req.body;
+      
+      // Simple email notification (without nodemailer on Vercel)
+      console.log('Free Build Request Received:', {
+        name,
+        email,
+        website,
+        biggestTimeSuck,
+        automationDetails,
+        shareResults
+      });
+
+      // You can integrate with a service like SendGrid or store in database
+      // For now, just log and return success
+      res.json({ 
+        success: true,
+        message: 'Your free automation slot is locked! We\'ll reach out within 24 hours.'
+      });
+      
+    } catch (error: any) {
+      console.error("Free build submission error:", error);
+      res.status(500).json({ error: "Failed to submit request" });
+    }
+  });
+
+  // Start chat consultation
+  app.post("/api/consultation/start-chat", async (req: Request, res: Response) => {
+    try {
+      const { sessionId } = req.body;
+      
+      if (!sessionId) {
+        return res.status(400).json({ error: "Session ID is required" });
+      }
+
+      const storage = await getStorage();
+      const session = await storage.getConsultationSession?.(parseInt(sessionId));
+      
+      if (!session) {
+        return res.status(404).json({ error: "Session not found" });
+      }
+
+      // Generate first question
+      const firstQuestion = {
+        text: "Great! Let me understand your coaching business better. What's the main challenge you're facing with lead generation and client management?",
+        suggestions: [
+          "Too many manual tasks",
+          "Missing follow-ups",
+          "No time for marketing",
+          "Need better systems"
+        ]
+      };
+
+      res.json({
+        success: true,
+        session,
+        firstQuestion
+      });
+      
+    } catch (error: any) {
+      console.error("Error starting chat consultation:", error);
+      res.status(500).json({ error: "Failed to start chat consultation" });
+    }
+  });
+
+  // Reset consultation
+  app.post("/api/consultation/reset", async (req: Request, res: Response) => {
+    try {
+      const storage = await getStorage();
+      await storage.clearMessages();
+      const session = await storage.getCurrentConsultationSession();
+      if (session) {
+        await storage.completeConsultationSession?.(session.id);
+      }
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to reset consultation" });
+    }
+  });
+
+  // AI Agent Expert submission
+  app.post("/api/ai-agent-expert", async (req: Request, res: Response) => {
+    try {
+      const formData = req.body;
+      
+      console.log('AI Agent Expert Request:', formData);
+      
+      // Process the AI agent expert request
+      // You can store in database or send notifications
+      
+      res.json({
+        success: true,
+        message: 'Your AI agent request has been received. We\'ll contact you within 24 hours.'
+      });
+      
+    } catch (error: any) {
+      console.error("AI agent expert submission error:", error);
+      res.status(500).json({ error: "Failed to submit AI agent request" });
+    }
+  });
+
+  // Get consultation results
+  app.get("/api/consultation/results/:sessionId?", async (req: Request, res: Response) => {
+    try {
+      const sessionId = req.params.sessionId;
+      const storage = await getStorage();
+      let session;
+      
+      if (sessionId) {
+        session = await storage.getConsultationSession?.(parseInt(sessionId));
+      } else {
+        // Get the most recent completed session
+        session = await storage.getLastCompletedConsultationSession?.();
+      }
+      
+      if (!session) {
+        return res.status(404).json({ error: "No completed consultation found" });
+      }
+      
+      // Parse user responses
+      const userResponses = JSON.parse(session.userResponses || "{}");
+      
+      res.json({
+        session: {
+          id: session.id,
+          websiteUrl: session.websiteUrl,
+          businessSummary: session.businessSummary,
+          completedAt: session.updatedAt
+        },
+        userResponses,
+        finalAnalysis: session.finalAnalysis || ""
+      });
+    } catch (error) {
+      console.error("Error fetching consultation results:", error);
+      res.status(500).json({ error: "Failed to fetch results" });
+    }
+  });
+
+  // Projects endpoints
+  app.get("/api/projects", async (req: Request, res: Response) => {
+    try {
+      const storage = await getStorage();
+      const projects = await storage.getProjects?.() || [];
+      res.json(projects);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+      res.status(500).json({ error: "Failed to fetch projects" });
+    }
+  });
+
+  app.post("/api/projects", async (req: Request, res: Response) => {
+    try {
+      const storage = await getStorage();
+      const project = await storage.createProject?.(req.body) || { id: 1, ...req.body };
+      res.json(project);
+    } catch (error) {
+      console.error("Error creating project:", error);
+      res.status(500).json({ error: "Failed to create project" });
+    }
+  });
+
   console.log('[Vercel] Routes registered successfully');
 }
 
