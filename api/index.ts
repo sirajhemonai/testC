@@ -26,8 +26,43 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // Health check endpoint
-app.get('/api/health', (req: Request, res: Response) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+app.get('/api/health', async (req: Request, res: Response) => {
+  const health: any = {
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    environment: {
+      hasDatabase: !!process.env.DATABASE_URL,
+      hasGemini: !!process.env.GEMINI_API_KEY,
+      hasPerplexity: !!process.env.PERPLEXITY_API_KEY,
+      hasBrightData: !!process.env.BRIGHTDATA_API_KEY,
+    }
+  };
+
+  // Test database connection
+  if (process.env.DATABASE_URL) {
+    try {
+      const { Pool } = await import('@neondatabase/serverless');
+      const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+      const result = await pool.query('SELECT NOW()');
+      await pool.end();
+      health.database = {
+        connected: true,
+        timestamp: result.rows[0].now
+      };
+    } catch (error: any) {
+      health.database = {
+        connected: false,
+        error: error.message
+      };
+    }
+  } else {
+    health.database = {
+      connected: false,
+      error: 'DATABASE_URL not configured'
+    };
+  }
+
+  res.json(health);
 });
 
 // Initialize routes asynchronously
