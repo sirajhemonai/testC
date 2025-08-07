@@ -58,31 +58,44 @@ const notifications = [
 export function RealTimeValidation() {
   const [currentNotification, setCurrentNotification] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
 
   useEffect(() => {
+    // Only show 2 notifications total
+    if (notificationCount >= 2) return;
+
     const interval = setInterval(() => {
-      setIsVisible(true);
-      setTimeout(() => {
-        setIsVisible(false);
+      if (notificationCount < 2) {
+        setIsVisible(true);
         setTimeout(() => {
-          setCurrentNotification((prev) => (prev + 1) % notifications.length);
-        }, 500);
-      }, 3000);
+          setIsVisible(false);
+          setTimeout(() => {
+            setCurrentNotification((prev) => (prev + 1) % notifications.length);
+            setNotificationCount(prev => prev + 1);
+          }, 500);
+        }, 3000);
+      }
     }, 5000);
 
-    // Show first notification after 2 seconds
-    setTimeout(() => setIsVisible(true), 2000);
+    // Show first notification after 8 seconds
+    setTimeout(() => {
+      if (notificationCount < 2) {
+        setIsVisible(true);
+        setNotificationCount(1);
+      }
+    }, 8000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [notificationCount]);
 
   const notification = notifications[currentNotification];
 
+  // Hide on mobile devices (hidden on screens smaller than sm breakpoint)
   return (
-    <div className="fixed top-20 right-4 z-50">
+    <div className="fixed bottom-4 left-4 z-50 hidden sm:block">
       <div 
         className={`bg-white dark:bg-gray-800 border border-green-200 dark:border-green-700 rounded-lg p-3 shadow-lg max-w-xs transition-all duration-500 ${
-          isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+          isVisible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
         }`}
       >
         <div className="flex items-center gap-2">
