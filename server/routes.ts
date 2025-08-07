@@ -77,11 +77,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let automationResearch;
       
       // FAST: Extract basic info from URL for immediate response  
-      const domain = new URL(websiteUrl).hostname.replace('www.', '');
-      const businessName = domain.split('.')[0].replace(/[-_]/g, ' ')
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
+      let domain = '';
+      let businessName = 'Your Business';
+      
+      try {
+        // Validate and parse URL
+        let urlToParse = websiteUrl;
+        if (!urlToParse.startsWith('http://') && !urlToParse.startsWith('https://')) {
+          urlToParse = 'https://' + urlToParse;
+        }
+        
+        const parsedUrl = new URL(urlToParse);
+        domain = parsedUrl.hostname.replace('www.', '');
+        businessName = domain.split('.')[0].replace(/[-_]/g, ' ')
+          .split(' ')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+      } catch (urlError) {
+        console.error('URL parsing error:', urlError);
+        // Use fallback name from URL string
+        businessName = websiteUrl.replace(/https?:\/\//, '').replace('www.', '').split(/[.\/]/)[0] || 'Your Business';
+      }
 
       // Create quick summary for immediate response
       const quickSummary = {
